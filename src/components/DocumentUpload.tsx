@@ -80,8 +80,7 @@ export const DocumentUpload: React.FC = () => {
         <div className="text-sm text-gray-600">
           Drag and drop a file here, or
           <Button
-            type="Button"
-            className="ml-1 underline text-gray-900"
+            className="ml-1 underline"
             aria-label="browse"
             onClick={() => inputRef.current?.click()}
           >

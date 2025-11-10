@@ -31,7 +31,7 @@ export const DocumentList: React.FC = () => {
           {(['All', 'Pending', 'Signed', 'Declined'] as const).map(f => (
             <Button
               key={f}
-              className={`px-3 py-1 borderRadius-lg border text-sm ${filter === f ? 'bg-gray-900 text-white' : 'bg-white'}`}
+              className={`px-3 py-1 borderRadius-lg border text-sm ${filter === f ? 'bg-gray-900 text-white' : 'bg-white text-black hover:text-white'}`}
               onClick={() => setFilter(f)}
             >
               {f}
@@ -54,7 +54,7 @@ export const DocumentList: React.FC = () => {
       {/* Table on desktop */}
       <div className="hidden md:block overflow-x-auto">
         <table className="min-w-full text-sm rounded-lg overflow-hidden">
-          <thead className="bg-gray-50 border-1 border-black ">
+          <thead className="bg-gray-50">
             <tr>
               <th className="px-3 py-2 text-left border-b">Name</th>
               <th className="px-3 py-2 text-left border-b">Upload date</th>
