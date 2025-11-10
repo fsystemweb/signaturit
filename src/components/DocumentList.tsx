@@ -11,6 +11,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 
 type SortKey = 'date' | 'status'
 
@@ -38,7 +46,8 @@ export const DocumentList: React.FC = () => {
           {(['All', 'Pending', 'Signed', 'Declined'] as const).map(f => (
             <Button
               key={f}
-              className={`px-3 py-1 borderRadius-lg border text-sm ${filter === f ? 'bg-gray-900 text-white' : 'bg-white text-black hover:text-white'}`}
+              variant={filter === f ? 'default' : 'outline'}
+              className="px-3 py-1 text-sm"
               onClick={() => setFilter(f)}
             >
               {f}
@@ -59,23 +68,23 @@ export const DocumentList: React.FC = () => {
         </div>
       </div>
 
-      <div className="hidden md:block overflow-x-auto">
-        <table className="min-w-full text-sm rounded-lg overflow-hidden">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-3 py-2 text-left border-b">Name</th>
-              <th className="px-3 py-2 text-left border-b">Upload date</th>
-              <th className="px-3 py-2 text-left border-b">Status</th>
-              <th className="px-3 py-2 text-left border-b">Signers</th>
-              <th className="px-3 py-2 text-left border-b">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
+      <div className="hidden md:block rounded-md border">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Name</TableHead>
+              <TableHead>Upload date</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead>Signers</TableHead>
+              <TableHead>Actions</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
             {sorted.map(doc => (
               <Row key={doc.id} doc={doc} />
             ))}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       </div>
 
       <div className="md:hidden grid grid-cols-1 gap-3">
@@ -91,27 +100,27 @@ const Row: React.FC<{ doc: DocumentItem }> = ({ doc }) => {
   const [open, setOpen] = React.useState(false)
   const signedCount = doc.signers.filter(s => s.status === 'Signed').length
   const progressLabel = `${signedCount} of ${doc.signers.length} signed`
+
   return (
     <>
-      <tr className="hover:bg-gray-50">
-        <td className="px-3 py-2 border-b">{doc.filename}</td>
-        <td className="px-3 py-2 border-b">{new Date(doc.uploadDate).toLocaleString()}</td>
-        <td className="px-3 py-2 border-b"><StatusBadge status={doc.status} /></td>
-        <td className="px-3 py-2 border-b">{progressLabel}</td>
-        <td className="px-3 py-2 border-b">
-          <Button className="btn-outline px-3 py-1 text-sm" onClick={() => setOpen(v => !v)}>
+      <TableRow>
+        <TableCell>{doc.filename}</TableCell>
+        <TableCell>{new Date(doc.uploadDate).toLocaleString()}</TableCell>
+        <TableCell><StatusBadge status={doc.status} /></TableCell>
+        <TableCell>{progressLabel}</TableCell>
+        <TableCell>
+          <Button variant="outline" size="sm" onClick={() => setOpen(v => !v)}>
             {open ? 'Hide' : 'View'}
           </Button>
-        </td>
-      </tr>
-      {open ? (
-        <tr>
-          <td colSpan={5} className="px-3 py-3 border-b bg-gray-50">
+        </TableCell>
+      </TableRow>
+      {open && (
+        <TableRow>
+          <TableCell colSpan={5} className="bg-muted">
             <DocumentCard doc={doc} />
-          </td>
-        </tr>
-      ) : null}
+          </TableCell>
+        </TableRow>
+      )}
     </>
   )
 }
-
