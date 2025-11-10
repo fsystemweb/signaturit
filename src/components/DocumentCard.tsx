@@ -3,6 +3,11 @@ import { DocumentItem } from '../types'
 import { StatusBadge } from './StatusBadge'
 import { SignatureRequestForm } from './SignatureRequestForm'
 import { useApp } from '../state/AppContext'
+import { Button } from "@/components/ui/button"
+import { Trash } from 'lucide-react';
+import { Signature } from 'lucide-react';
+import { X } from 'lucide-react';
+
 
 export const DocumentCard: React.FC<{ doc: DocumentItem }> = ({ doc }) => {
   const { deleteDocument, updateDocument, notify } = useApp()
@@ -25,7 +30,6 @@ export const DocumentCard: React.FC<{ doc: DocumentItem }> = ({ doc }) => {
     let status = updated.status
     if (signed === total) status = 'Signed'
     else if (declined === total) status = 'Declined'
-    else if (signed > 0 || declined > 0) status = 'Partially Signed'
     updateDocument({ ...updated, status })
     notify({ type, documentName: doc.filename, signerEmail: pending.email })
   }
@@ -41,7 +45,25 @@ export const DocumentCard: React.FC<{ doc: DocumentItem }> = ({ doc }) => {
         </div>
         <div className="flex items-center gap-2">
           <StatusBadge status={doc.status} />
-          <button className="btn-outline px-3 py-1 text-sm" onClick={() => deleteDocument(doc.id)}>Delete</button>
+          <Button
+            variant="destructive"
+            size="sm"
+            className="text-sm text-white hidden md:flex gap-2"
+            onClick={() => deleteDocument(doc.id)}
+          >
+            <Trash size={16} />
+            Delete
+          </Button>
+
+          <Button
+            variant="destructive"
+            size="icon"
+            className="text-sm text-white  md:hidden"
+            onClick={() => deleteDocument(doc.id)}
+            title="Delete"
+          >
+            <Trash size={16} />
+          </Button>
         </div>
       </div>
       <div className="text-sm text-gray-700">{progressLabel}</div>
@@ -58,11 +80,42 @@ export const DocumentCard: React.FC<{ doc: DocumentItem }> = ({ doc }) => {
         <div>
           <SignatureRequestForm documentId={doc.id} />
         </div>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 mt-auto">
           <div className="text-sm font-medium">Simulate status update</div>
           <div className="flex gap-2">
-            <button className="btn" onClick={() => simulate('Signed')}>Mark next signer: Signed</button>
-            <button className="btn-outline" onClick={() => simulate('Declined')}>Mark next signer: Declined</button>
+            <Button
+              size="sm"
+              className="text-sm text-white hidden md:flex gap-2 bg-green-500 hover:bg-green-600"
+              onClick={() => simulate('Signed')}
+            >
+              <Signature size={16} />
+              Mark as Signed
+            </Button>
+            <Button
+              variant="destructive"
+              size="icon"
+              className="text-sm text-white  md:hidden bg-green-500 hover:bg-green-600" 
+              onClick={() => simulate('Signed')} title="Mark as Signed"
+            >
+              <Signature size={16} />
+            </Button>
+
+
+            <Button
+              size="sm"
+              className="text-sm text-white hidden md:flex gap-2 bg-red-500 hover:bg-red-600"
+              onClick={() => simulate('Declined')}
+            >
+              <X size={16} />
+              Mark as Declined
+            </Button>
+            <Button
+              size="icon"
+              className="text-sm text-white  md:hidden bg-red-500 hover:bg-red-600"
+              onClick={() => simulate('Declined')} title="Mark as Declined"
+            >
+              <X size={16} />
+            </Button>
           </div>
         </div>
       </div>

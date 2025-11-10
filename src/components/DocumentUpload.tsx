@@ -1,5 +1,7 @@
 import * as React from 'react'
 import { useApp } from '../state/AppContext'
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 
 const ACCEPTED_TYPES = [
   'application/pdf',
@@ -78,16 +80,15 @@ export const DocumentUpload: React.FC = () => {
       >
         <div className="text-sm text-gray-600">
           Drag and drop a file here, or
-          <button
-            type="button"
-            className="ml-1 underline text-gray-900"
+          <Button
+            className="ml-1 underline"
             aria-label="browse"
             onClick={() => inputRef.current?.click()}
           >
             browse
-          </button>
+          </Button>
         </div>
-        <input
+        <Input
           ref={inputRef}
           className="hidden"
           type="file"
@@ -109,7 +110,7 @@ export const DocumentUpload: React.FC = () => {
   )
 }
 
-function isAllowedByName(name: string): boolean {
+const isAllowedByName = (name: string): boolean =>{
   const n = name.toLowerCase()
   return n.endsWith('.pdf') || n.endsWith('.doc') || n.endsWith('.docx') || n.endsWith('.xlsx')
 }

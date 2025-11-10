@@ -10,7 +10,8 @@ const config = {
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
   moduleNameMapper: {
     "\\.(css|less|scss|sass)$": "identity-obj-proxy",
-    "^nanoid$": "<rootDir>/tests/shims/nanoid.ts"
+    "^nanoid$": "<rootDir>/tests/shims/nanoid.ts",
+    "^@/(.*)$": "<rootDir>/src/$1"
   },
   testPathIgnorePatterns: ["/node_modules/", "/dist/"]
 }
