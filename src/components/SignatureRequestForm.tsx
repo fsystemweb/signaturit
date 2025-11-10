@@ -44,7 +44,7 @@ export const SignatureRequestForm: React.FC<{ documentId: string }> = ({ documen
       />
       {error ? <div className="text-sm text-red-600">{error}</div> : null}
       <div>
-        <Button className="btn" type="submit">Send signature request</Button>
+        <Button className="btn" type="submit">Send request</Button>
       </div>
     </form>
   )
