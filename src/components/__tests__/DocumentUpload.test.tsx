@@ -16,7 +16,6 @@ describe('DocumentUpload', () => {
   it('rejects files over 10MB', async () => {
     renderWithProvider(<DocumentUpload />)
     const input = screen.getByLabelText(/browse/i) as HTMLButtonElement
-    // find hidden input via DOM traversal
     const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement
     const file = createFile('big.pdf', 10 * 1024 * 1024 + 1, 'application/pdf')
     const dt = { files: [file] } as unknown as FileList

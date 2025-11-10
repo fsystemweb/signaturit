@@ -10,11 +10,11 @@ describe('SignatureRequestForm', () => {
         <SignatureRequestForm documentId="doc-1" />
       </AppProvider>
     )
-    fireEvent.click(screen.getByText(/Send signature request/i))
+  fireEvent.click(screen.getByText(/Send request/i))
     expect(screen.getByText(/Please enter at least one valid email/)).toBeInTheDocument()
     const input = screen.getByPlaceholderText(/Enter emails/)
     fireEvent.change(input, { target: { value: 'test@example.com, invalid' } })
-    fireEvent.click(screen.getByText(/Send signature request/i))
+  fireEvent.click(screen.getByText(/Send request/i))
     expect(screen.queryByText(/Please enter at least one valid email/)).toBeNull()
   })
 })
