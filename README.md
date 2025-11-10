@@ -2,7 +2,7 @@
 [![Node Version](https://img.shields.io/badge/node-22+-green?logo=node.js)](https://nodejs.org/)
 [![TypeScript](https://img.shields.io/badge/typescript-5.6+-blue?logo=typescript)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/react-18.3+-61DAFB?logo=react)](https://react.dev/)
-[![shadcn/ui](https://img.shields.io/badge/shadcn/ui-000000?logo=shadcn&logoColor=white)](https://ui.shadcn.dev)
+[![shadcn/ui](https://img.shields.io/badge/shadcn/ui-latest?logo=shadcn&logoColor=white)](https://ui.shadcn.com/)
 [![Vite](https://img.shields.io/badge/vite-5.4+-646CFF?logo=vite)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/tailwindcss-4.1-06B6D4?logo=tailwind-css)](https://tailwindcss.com/)
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
