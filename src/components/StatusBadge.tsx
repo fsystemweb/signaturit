@@ -9,8 +9,6 @@ export const StatusBadge: React.FC<{ status: DocumentStatus | SignerStatus }> = 
         return 'bg-yellow-500 text-white hover:bg-yellow-600'
       case 'Signed':
         return 'bg-blue-500 text-white hover:bg-blue-600'
-      case 'Partially Signed':
-        return 'bg-orange-500 text-white hover:bg-orange-600'
       case 'Declined':
         return 'bg-red-500 text-white hover:bg-red-600'
       default:

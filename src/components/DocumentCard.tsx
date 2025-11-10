@@ -30,7 +30,6 @@ export const DocumentCard: React.FC<{ doc: DocumentItem }> = ({ doc }) => {
     let status = updated.status
     if (signed === total) status = 'Signed'
     else if (declined === total) status = 'Declined'
-    else if (signed > 0 || declined > 0) status = 'Partially Signed'
     updateDocument({ ...updated, status })
     notify({ type, documentName: doc.filename, signerEmail: pending.email })
   }

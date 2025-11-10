@@ -1,4 +1,4 @@
-export type DocumentStatus = 'Pending' | 'Signed' | 'Declined' | 'Partially Signed'
+export type DocumentStatus = 'Pending' | 'Signed' | 'Declined'
 export type SignerStatus = 'Pending' | 'Signed' | 'Declined'
 
 export interface Signer {

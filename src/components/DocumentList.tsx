@@ -33,7 +33,7 @@ export const DocumentList: React.FC = () => {
     if (sortBy === 'date') {
       arr.sort((a, b) => +new Date(b.uploadDate) - +new Date(a.uploadDate))
     } else {
-      const order = { Pending: 0, 'Partially Signed': 1, Signed: 2, Declined: 3 } as Record<string, number>
+      const order = { Pending: 0, Signed: 1, Declined: 2 } as Record<string, number>
       arr.sort((a, b) => (order[a.status] ?? 99) - (order[b.status] ?? 99))
     }
     return arr

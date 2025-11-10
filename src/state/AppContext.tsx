@@ -51,7 +51,7 @@ const mockDocuments: DocumentItem[] = [
     fileType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
     fileSize: 512000,
     uploadDate: new Date('2024-11-03'),
-    status: 'Partially Signed',
+    status: 'Pending',
     signers: [
       { id: nanoid(), email: 'alex.brown@example.com', status: 'Signed' },
       { id: nanoid(), email: 'emma.davis@example.com', status: 'Pending' }
