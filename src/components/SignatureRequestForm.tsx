@@ -1,6 +1,8 @@
 import * as React from 'react'
 import { useApp } from '../state/AppContext'
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
 
 export const SignatureRequestForm: React.FC<{ documentId: string }> = ({ documentId }) => {
   const { sendSignatureRequest } = useApp()
@@ -28,15 +30,14 @@ export const SignatureRequestForm: React.FC<{ documentId: string }> = ({ documen
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-3">
       <label className="text-sm font-medium">Signer email(s)</label>
-      <input
-        className="input"
+      <Input
         placeholder="Enter emails separated by commas"
         value={emailsText}
         onChange={e => setEmailsText(e.target.value)}
       />
       <label className="text-sm font-medium">Message (optional)</label>
-      <textarea
-        className="input min-h-[80px]"
+      <Textarea
+        className="min-h-[80px]"
         placeholder="Add a message to the signers"
         value={message}
         onChange={e => setMessage(e.target.value)}

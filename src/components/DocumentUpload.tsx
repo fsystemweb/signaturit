@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { useApp } from '../state/AppContext'
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 
 const ACCEPTED_TYPES = [
   'application/pdf',
@@ -87,7 +88,7 @@ export const DocumentUpload: React.FC = () => {
             browse
           </Button>
         </div>
-        <input
+        <Input
           ref={inputRef}
           className="hidden"
           type="file"
