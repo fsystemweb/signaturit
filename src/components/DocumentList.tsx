@@ -4,6 +4,13 @@ import { DocumentCard } from './DocumentCard'
 import { DocumentItem } from '../types'
 import { StatusBadge } from './StatusBadge'
 import { Button } from "@/components/ui/button"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
 type SortKey = 'date' | 'status'
 
@@ -11,7 +18,7 @@ export const DocumentList: React.FC = () => {
   const { documents, filter, setFilter } = useApp()
   const [sortBy, setSortBy] = React.useState<SortKey>('date')
 
-  const filtered = documents.filter(d => (filter === 'All' ? true : d.status === filter))
+  const filtered = documents.filter(item => (filter === 'All' ? true : item.status === filter))
 
   const sorted = React.useMemo(() => {
     const arr = [...filtered]
@@ -39,19 +46,19 @@ export const DocumentList: React.FC = () => {
           ))}
         </div>
         <div className="flex items-center gap-2">
-          <label className="text-sm text-gray-600 w-full">Sort by</label>
-          <select
-            className="input py-1 h-9 w-40"
-            value={sortBy}
-            onChange={e => setSortBy(e.target.value as SortKey)}
-          >
-            <option value="date">Upload date</option>
-            <option value="status">Status</option>
-          </select>
+          <label className="text-sm text-gray-600">Sort by</label>
+          <Select value={sortBy} onValueChange={(value) => setSortBy(value as SortKey)}>
+            <SelectTrigger className="w-40">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="date">Upload date</SelectItem>
+              <SelectItem value="status">Status</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
       </div>
 
-      {/* Table on desktop */}
       <div className="hidden md:block overflow-x-auto">
         <table className="min-w-full text-sm rounded-lg overflow-hidden">
           <thead className="bg-gray-50">
@@ -71,7 +78,6 @@ export const DocumentList: React.FC = () => {
         </table>
       </div>
 
-      {/* Cards on mobile */}
       <div className="md:hidden grid grid-cols-1 gap-3">
         {sorted.map(doc => (
           <DocumentCard key={doc.id} doc={doc} />
