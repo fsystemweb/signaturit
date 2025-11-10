@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import { useApp } from '../state/AppContext'
 
 const ACCEPTED_TYPES = [
@@ -27,9 +27,11 @@ export const DocumentUpload: React.FC = () => {
     return null
   }
 
-  const handleFiles = async (files: FileList | null) => {
-    if (!files || files.length === 0) return
-    const file = files[0]
+  const handleFiles = async (files: FileList | { files: File[] } | File[] | null) => {
+    if (!files) return
+    const list = Array.isArray(files) ? files : (files as any).length !== undefined ? (files as any) : (files as any).files
+    if (!list || list.length === 0) return
+    const file = list[0] as File
     const v = validate(file)
     if (v) {
       setError(v)
@@ -79,6 +81,7 @@ export const DocumentUpload: React.FC = () => {
           <button
             type="button"
             className="ml-1 underline text-gray-900"
+            aria-label="browse"
             onClick={() => inputRef.current?.click()}
           >
             browse

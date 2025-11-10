@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import { DocumentStatus, SignerStatus } from '../types'
 
 export const StatusBadge: React.FC<{ status: DocumentStatus | SignerStatus }> = ({ status }) => {

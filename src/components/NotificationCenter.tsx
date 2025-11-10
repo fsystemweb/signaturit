@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import * as Toast from '@radix-ui/react-toast'
 import { useApp } from '../state/AppContext'
 import { format } from 'date-fns'

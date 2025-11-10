@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { App } from '../pages/App'
 import { AppProvider } from '../state/AppContext'
@@ -29,8 +29,9 @@ describe('Integration: upload -> request -> notification', () => {
     // There should be a documents section entry
     expect(screen.getByText(/Documents/)).toBeInTheDocument()
 
-    // Open first row if on desktop table is rendered (it might render card on jsdom width; rely on form presence)
-    const emailInput = screen.getByPlaceholderText(/Enter emails/i)
+  // Open first row if on desktop table is rendered (it might render card on jsdom width; rely on form presence)
+  // wait for the email input to appear (upload -> list render is async)
+  const emailInput = await screen.findByPlaceholderText(/Enter emails/i)
     fireEvent.change(emailInput, { target: { value: 'a@example.com' } })
     fireEvent.click(screen.getByText(/Send signature request/i))
 
