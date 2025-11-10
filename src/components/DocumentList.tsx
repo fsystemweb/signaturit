@@ -30,7 +30,7 @@ export const DocumentList: React.FC = () => {
           {(['All', 'Pending', 'Signed', 'Declined'] as const).map(f => (
             <button
               key={f}
-              className={`px-3 py-1 rounded-md border text-sm ${filter === f ? 'bg-gray-900 text-white' : 'bg-white'}`}
+              className={`px-3 py-1 borderRadius-lg border text-sm ${filter === f ? 'bg-gray-900 text-white' : 'bg-white'}`}
               onClick={() => setFilter(f)}
             >
               {f}
