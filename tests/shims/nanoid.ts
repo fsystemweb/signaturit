@@ -1,4 +1,4 @@
-export function nanoid(): string {
+export const nanoid = (): string =>{
   return "test-id"
 }
 

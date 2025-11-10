@@ -50,13 +50,12 @@ export const SignatureRequestForm: React.FC<{ documentId: string }> = ({ documen
   )
 }
 
-function parseEmails(input: string): string[] {
+const parseEmails = (input: string): string[] => {
   const parts = input.split(/[,;\s]+/).map(s => s.trim()).filter(Boolean)
   return parts.filter(isValidEmail)
 }
 
-function isValidEmail(email: string): boolean {
-  // Simple RFC5322-ish regex good enough for UI validation
+const isValidEmail = (email: string): boolean => {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
 }
 

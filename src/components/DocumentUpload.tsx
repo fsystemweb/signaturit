@@ -110,7 +110,7 @@ export const DocumentUpload: React.FC = () => {
   )
 }
 
-function isAllowedByName(name: string): boolean {
+const isAllowedByName = (name: string): boolean =>{
   const n = name.toLowerCase()
   return n.endsWith('.pdf') || n.endsWith('.doc') || n.endsWith('.docx') || n.endsWith('.xlsx')
 }

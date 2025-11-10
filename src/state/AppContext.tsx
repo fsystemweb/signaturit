@@ -19,8 +19,72 @@ type Action =
   | { type: 'ADD_NOTIFICATION'; payload: NotificationItem }
   | { type: 'REMOVE_NOTIFICATION'; payload: { id: string } }
 
+// Note: Mock data just for demonstration purposes
+const mockDocuments: DocumentItem[] = [
+  {
+    id: nanoid(),
+    filename: 'Contract_2024.pdf',
+    fileType: 'application/pdf',
+    fileSize: 2048576,
+    uploadDate: new Date('2024-11-05'),
+    status: 'Signed',
+    signers: [
+      { id: nanoid(), email: 'john.doe@example.com', status: 'Signed' },
+      { id: nanoid(), email: 'jane.smith@example.com', status: 'Signed' }
+    ]
+  },
+  {
+    id: nanoid(),
+    filename: 'Agreement_Q4.pdf',
+    fileType: 'application/pdf',
+    fileSize: 1524288,
+    uploadDate: new Date('2024-11-08'),
+    status: 'Pending',
+    signers: [
+      { id: nanoid(), email: 'mike.johnson@example.com', status: 'Pending' },
+      { id: nanoid(), email: 'sarah.williams@example.com', status: 'Pending' }
+    ]
+  },
+  {
+    id: nanoid(),
+    filename: 'Budget_Review.xlsx',
+    fileType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    fileSize: 512000,
+    uploadDate: new Date('2024-11-03'),
+    status: 'Partially Signed',
+    signers: [
+      { id: nanoid(), email: 'alex.brown@example.com', status: 'Signed' },
+      { id: nanoid(), email: 'emma.davis@example.com', status: 'Pending' }
+    ]
+  },
+  {
+    id: nanoid(),
+    filename: 'Proposal_Final.pdf',
+    fileType: 'application/pdf',
+    fileSize: 3145728,
+    uploadDate: new Date('2024-11-01'),
+    status: 'Declined',
+    signers: [
+      { id: nanoid(), email: 'robert.miller@example.com', status: 'Declined' }
+    ]
+  },
+  {
+    id: nanoid(),
+    filename: 'NDA_2024.pdf',
+    fileType: 'application/pdf',
+    fileSize: 786432,
+    uploadDate: new Date('2024-11-07'),
+    status: 'Pending',
+    signers: [
+      { id: nanoid(), email: 'lisa.anderson@example.com', status: 'Pending' },
+      { id: nanoid(), email: 'chris.taylor@example.com', status: 'Pending' },
+      { id: nanoid(), email: 'david.martinez@example.com', status: 'Pending' }
+    ]
+  }
+]
+
 const initialState: AppState = {
-  documents: [],
+  documents: mockDocuments,
   notifications: [],
   filter: 'All'
 }
@@ -66,7 +130,7 @@ export const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => 
     const newDoc: DocumentItem = {
       id: nanoid(),
       filename: file.name,
-      fileType: file.type || guessType(file.name),
+      fileType: file.type || assumeType(file.name),
       fileSize: file.size,
       uploadDate: new Date(),
       status: 'Pending',
@@ -125,20 +189,20 @@ export const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>
 }
 
-export function useApp() {
-  const ctx = React.useContext(AppContext)
-  if (!ctx) {
-    throw new Error('useApp must be used within AppProvider')
-  }
-  return ctx
-}
-
-function guessType(name: string): string {
+const assumeType = (name: string): string =>{
   const lower = name.toLowerCase()
   if (lower.endsWith('.pdf')) return 'application/pdf'
   if (lower.endsWith('.doc')) return 'application/msword'
   if (lower.endsWith('.docx')) return 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
   if (lower.endsWith('.xlsx')) return 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
   return 'application/octet-stream'
+}
+
+export function useApp() {
+  const ctx = React.useContext(AppContext)
+  if (!ctx) {
+    throw new Error('useApp must be used within AppProvider')
+  }
+  return ctx
 }
 
