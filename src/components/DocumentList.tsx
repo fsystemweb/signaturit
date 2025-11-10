@@ -38,7 +38,7 @@ export const DocumentList: React.FC = () => {
           ))}
         </div>
         <div className="flex items-center gap-2">
-          <label className="text-sm text-gray-600">Sort by</label>
+          <label className="text-sm text-gray-600 w-full">Sort by</label>
           <select
             className="input py-1 h-9 w-40"
             value={sortBy}
@@ -52,8 +52,8 @@ export const DocumentList: React.FC = () => {
 
       {/* Table on desktop */}
       <div className="hidden md:block overflow-x-auto">
-        <table className="min-w-full border text-sm">
-          <thead className="bg-gray-50">
+        <table className="min-w-full text-sm rounded-lg overflow-hidden">
+          <thead className="bg-gray-50 border-1 border-black ">
             <tr>
               <th className="px-3 py-2 text-left border-b">Name</th>
               <th className="px-3 py-2 text-left border-b">Upload date</th>
