@@ -32,9 +32,9 @@ describe('DocumentList', () => {
     )
   // there are multiple nodes that contain "Upload date" (select option and table header)
   expect(screen.getAllByText(/Upload date/).length).toBeGreaterThan(0)
-  // Filter buttons appear (the text "Pending" may also appear in badges; target the button role)
+  // Filter Buttons appear (the text "Pending" may also appear in badges; target the Button role)
   expect(screen.getByText('All')).toBeInTheDocument()
-  expect(screen.getAllByRole('button', { name: 'Pending' }).length).toBeGreaterThan(0)
+  expect(screen.getAllByRole('Button', { name: 'Pending' }).length).toBeGreaterThan(0)
   })
 })
 

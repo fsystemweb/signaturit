@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { useApp } from '../state/AppContext'
+import { Button } from "@/components/ui/button"
 
 export const SignatureRequestForm: React.FC<{ documentId: string }> = ({ documentId }) => {
   const { sendSignatureRequest } = useApp()
@@ -42,7 +43,7 @@ export const SignatureRequestForm: React.FC<{ documentId: string }> = ({ documen
       />
       {error ? <div className="text-sm text-red-600">{error}</div> : null}
       <div>
-        <button className="btn" type="submit">Send signature request</button>
+        <Button className="btn" type="submit">Send signature request</Button>
       </div>
     </form>
   )

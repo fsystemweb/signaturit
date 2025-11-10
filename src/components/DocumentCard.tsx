@@ -3,6 +3,7 @@ import { DocumentItem } from '../types'
 import { StatusBadge } from './StatusBadge'
 import { SignatureRequestForm } from './SignatureRequestForm'
 import { useApp } from '../state/AppContext'
+import { Button } from "@/components/ui/button"
 
 export const DocumentCard: React.FC<{ doc: DocumentItem }> = ({ doc }) => {
   const { deleteDocument, updateDocument, notify } = useApp()
@@ -41,7 +42,7 @@ export const DocumentCard: React.FC<{ doc: DocumentItem }> = ({ doc }) => {
         </div>
         <div className="flex items-center gap-2">
           <StatusBadge status={doc.status} />
-          <button className="btn-outline px-3 py-1 text-sm" onClick={() => deleteDocument(doc.id)}>Delete</button>
+          <Button className="btn-outline px-3 py-1 text-sm" onClick={() => deleteDocument(doc.id)}>Delete</Button>
         </div>
       </div>
       <div className="text-sm text-gray-700">{progressLabel}</div>
@@ -61,8 +62,8 @@ export const DocumentCard: React.FC<{ doc: DocumentItem }> = ({ doc }) => {
         <div className="flex flex-col gap-2">
           <div className="text-sm font-medium">Simulate status update</div>
           <div className="flex gap-2">
-            <button className="btn" onClick={() => simulate('Signed')}>Mark next signer: Signed</button>
-            <button className="btn-outline" onClick={() => simulate('Declined')}>Mark next signer: Declined</button>
+            <Button className="btn" onClick={() => simulate('Signed')}>Mark next signer: Signed</Button>
+            <Button className="btn-outline" onClick={() => simulate('Declined')}>Mark next signer: Declined</Button>
           </div>
         </div>
       </div>

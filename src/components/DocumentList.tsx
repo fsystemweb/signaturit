@@ -3,6 +3,7 @@ import { useApp } from '../state/AppContext'
 import { DocumentCard } from './DocumentCard'
 import { DocumentItem } from '../types'
 import { StatusBadge } from './StatusBadge'
+import { Button } from "@/components/ui/button"
 
 type SortKey = 'date' | 'status'
 
@@ -28,13 +29,13 @@ export const DocumentList: React.FC = () => {
       <div className="flex flex-wrap items-center gap-3 justify-between">
         <div className="flex items-center gap-2">
           {(['All', 'Pending', 'Signed', 'Declined'] as const).map(f => (
-            <button
+            <Button
               key={f}
               className={`px-3 py-1 borderRadius-lg border text-sm ${filter === f ? 'bg-gray-900 text-white' : 'bg-white'}`}
               onClick={() => setFilter(f)}
             >
               {f}
-            </button>
+            </Button>
           ))}
         </div>
         <div className="flex items-center gap-2">
@@ -92,9 +93,9 @@ const Row: React.FC<{ doc: DocumentItem }> = ({ doc }) => {
         <td className="px-3 py-2 border-b"><StatusBadge status={doc.status} /></td>
         <td className="px-3 py-2 border-b">{progressLabel}</td>
         <td className="px-3 py-2 border-b">
-          <button className="btn-outline px-3 py-1 text-sm" onClick={() => setOpen(v => !v)}>
+          <Button className="btn-outline px-3 py-1 text-sm" onClick={() => setOpen(v => !v)}>
             {open ? 'Hide' : 'View'}
-          </button>
+          </Button>
         </td>
       </tr>
       {open ? (

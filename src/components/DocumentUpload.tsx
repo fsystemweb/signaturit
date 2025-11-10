@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { useApp } from '../state/AppContext'
+import { Button } from "@/components/ui/button"
 
 const ACCEPTED_TYPES = [
   'application/pdf',
@@ -78,14 +79,14 @@ export const DocumentUpload: React.FC = () => {
       >
         <div className="text-sm text-gray-600">
           Drag and drop a file here, or
-          <button
-            type="button"
+          <Button
+            type="Button"
             className="ml-1 underline text-gray-900"
             aria-label="browse"
             onClick={() => inputRef.current?.click()}
           >
             browse
-          </button>
+          </Button>
         </div>
         <input
           ref={inputRef}

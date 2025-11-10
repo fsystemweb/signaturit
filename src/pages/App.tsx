@@ -2,6 +2,7 @@ import * as React from 'react'
 import { DocumentUpload } from '../components/DocumentUpload'
 import { DocumentList } from '../components/DocumentList'
 import { NotificationCenter } from '../components/NotificationCenter'
+import { Button } from "@/components/ui/button"
 
 export const App: React.FC = () => {
   const [menuOpen, setMenuOpen] = React.useState(false)
@@ -10,9 +11,9 @@ export const App: React.FC = () => {
       <header className="border-b">
         <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <button className="md:hidden btn-outline px-3 py-2" aria-label="Open menu" onClick={() => setMenuOpen(v => !v)}>
+            <Button className="md:hidden btn-outline px-3 py-2" aria-label="Open menu" onClick={() => setMenuOpen(v => !v)}>
               ☰
-            </button>
+            </Button>
             <div className="font-semibold">Signaturit</div>
           </div>
           <nav className="hidden md:flex items-center gap-4">
