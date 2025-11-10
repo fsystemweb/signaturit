@@ -46,7 +46,6 @@ export const DocumentCard: React.FC<{ doc: DocumentItem }> = ({ doc }) => {
         <div className="flex items-center gap-2">
           <StatusBadge status={doc.status} />
           <Button
-            variant="destructive"
             size="sm"
             className="text-sm text-white hidden md:flex gap-2"
             onClick={() => deleteDocument(doc.id)}
@@ -56,7 +55,6 @@ export const DocumentCard: React.FC<{ doc: DocumentItem }> = ({ doc }) => {
           </Button>
 
           <Button
-            variant="destructive"
             size="icon"
             className="text-sm text-white  md:hidden"
             onClick={() => deleteDocument(doc.id)}
