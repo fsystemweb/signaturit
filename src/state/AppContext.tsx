@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useMemo, useReducer } from 'react'
+import * as React from 'react'
 import { DocumentItem, NotificationItem, Signer } from '../types'
 import { nanoid } from 'nanoid'
 
@@ -57,10 +57,10 @@ interface AppContextValue extends AppState {
   sendSignatureRequest: (docId: string, signers: Array<{ email: string }>, message?: string) => void
 }
 
-const AppContext = createContext<AppContextValue | undefined>(undefined)
+const AppContext = React.createContext<AppContextValue | undefined>(undefined)
 
 export const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, initialState)
+  const [state, dispatch] = React.useReducer(reducer, initialState)
 
   const addUploadedDocument = (file: File): DocumentItem => {
     const newDoc: DocumentItem = {
@@ -108,7 +108,7 @@ export const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => 
     notify({ type: 'RequestSent', documentName: doc.filename })
   }
 
-  const value = useMemo<AppContextValue>(
+  const value = React.useMemo<AppContextValue>(
     () => ({
       ...state,
       addUploadedDocument,
@@ -126,7 +126,7 @@ export const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => 
 }
 
 export function useApp() {
-  const ctx = useContext(AppContext)
+  const ctx = React.useContext(AppContext)
   if (!ctx) {
     throw new Error('useApp must be used within AppProvider')
   }

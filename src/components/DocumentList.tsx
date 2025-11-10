@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import { useApp } from '../state/AppContext'
 import { DocumentCard } from './DocumentCard'
 import { DocumentItem } from '../types'

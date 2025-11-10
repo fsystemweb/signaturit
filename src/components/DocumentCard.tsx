@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import { DocumentItem } from '../types'
 import { StatusBadge } from './StatusBadge'
 import { SignatureRequestForm } from './SignatureRequestForm'

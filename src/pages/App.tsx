@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import { DocumentUpload } from '../components/DocumentUpload'
 import { DocumentList } from '../components/DocumentList'
 import { NotificationCenter } from '../components/NotificationCenter'

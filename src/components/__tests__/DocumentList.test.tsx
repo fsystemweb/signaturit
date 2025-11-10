@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import { render, screen } from '@testing-library/react'
 import { DocumentList } from '../../components/DocumentList'
 import { AppProvider, useApp } from '../../state/AppContext'
@@ -18,7 +18,7 @@ const Seed: React.FC = () => {
       uploadDate: new Date(Date.now() - 1000)
     }
     updateDocument(d2)
-  }, [addUploadedDocument, updateDocument])
+  }, [])
   return null
 }
 
@@ -30,10 +30,11 @@ describe('DocumentList', () => {
         <DocumentList />
       </AppProvider>
     )
-    expect(screen.getByText(/Upload date/)).toBeInTheDocument()
-    // Filter buttons appear
-    expect(screen.getByText('All')).toBeInTheDocument()
-    expect(screen.getByText('Pending')).toBeInTheDocument()
+  // there are multiple nodes that contain "Upload date" (select option and table header)
+  expect(screen.getAllByText(/Upload date/).length).toBeGreaterThan(0)
+  // Filter buttons appear (the text "Pending" may also appear in badges; target the button role)
+  expect(screen.getByText('All')).toBeInTheDocument()
+  expect(screen.getAllByRole('button', { name: 'Pending' }).length).toBeGreaterThan(0)
   })
 })
 
