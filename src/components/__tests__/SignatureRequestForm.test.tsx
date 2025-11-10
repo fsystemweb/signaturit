@@ -48,13 +48,25 @@ describe('SignatureRequestForm', () => {
   })
 
   it('allows multiple unique emails and adds them to state', () => {
-    const StateConsumer: React.FC<{ docId: string }> = ({ docId }) => {
+    let firstDocId: string = ''
+
+    const Seed: React.FC = () => {
+      const { addUploadedDocument } = useApp()
+      if (!firstDocId) {
+        const file = new File([new Blob(['x'], { type: 'application/pdf' })], 'test.pdf', { type: 'application/pdf' })
+        const doc = addUploadedDocument(file)
+        firstDocId = doc.id
+      }
+      return null
+    }
+
+    const StateConsumer: React.FC = () => {
       const { documents } = useApp()
-      const doc = documents.find(d => d.id === docId)
+      const doc = documents.length > 0 ? documents[0] : null
       
       return (
         <>
-          <SignatureRequestForm documentId={docId} />
+          {doc && <SignatureRequestForm documentId={doc.id} />}
           <div data-testid="signer-count">{doc?.signers.length || 0}</div>
           {doc?.signers.map(signer => (
             <div key={signer.id} data-testid="signer-email">{signer.email}</div>
@@ -65,7 +77,8 @@ describe('SignatureRequestForm', () => {
 
     render(
       <AppProvider>
-        <StateConsumer docId="doc-1" />
+        <Seed />
+        <StateConsumer />
       </AppProvider>
     )
     
@@ -78,8 +91,10 @@ describe('SignatureRequestForm', () => {
     expect(screen.queryByText(/Please enter at least one valid email/)).toBeNull()
     
     // Verify emails were added to state
-    expect(screen.getByText('newuser1@example.com')).toBeInTheDocument()
-    expect(screen.getByText('newuser2@example.com')).toBeInTheDocument()
+    const signersEmails = screen.getAllByTestId('signer-email')
+    expect(signersEmails).toHaveLength(2)
+    expect(signersEmails[0]).toHaveTextContent('newuser1@example.com')
+    expect(signersEmails[1]).toHaveTextContent('newuser2@example.com')
   })
 
   it('prevents duplicate emails already in document state', () => {
@@ -95,7 +110,6 @@ describe('SignatureRequestForm', () => {
     )
     
     const input = screen.getByPlaceholderText(/Enter emails/)
-    // Try to add an email that already exists in the mock data (john.doe@example.com from Contract_2024.pdf)
     fireEvent.change(input, { target: { value: 'john.doe@example.com, jane@example.com, john.doe@example.com' } })
     fireEvent.click(screen.getByText(/Send request/i))
     
